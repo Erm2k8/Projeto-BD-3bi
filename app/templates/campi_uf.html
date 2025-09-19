@@ -1,0 +1,17 @@
+{% extends "base.html" %} 
+{% load humanize %}
+
+{% block titulo_pagina %}
+<h2>Quantidade de Campi por UF</h2>
+{% endblock %} 
+
+{% block conteudo %}
+<div class="dashboard">
+    {% for uf in result %}
+    <div class="card">
+        <h3>{{ uf.0 }}</h3>
+        <p>{{ uf.1 }}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

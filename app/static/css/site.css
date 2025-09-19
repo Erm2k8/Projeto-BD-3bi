@@ -1,0 +1,226 @@
+/***
+Usando o seletor "*" os estilos serão aplicados a todos os elementos da página
+***/
+* {
+    /* configura a família de fontes a ser utilizada */
+    font-family: Verdana, sans-serif;
+    
+    /* tamanho da fonte padrão do site */
+    font-size: 12pt;
+    
+    /* remove a margem de todos os elementos */
+    margin: 0px;
+}
+
+body {
+    /* cor de fundo padrao */
+    background-color: white;
+    
+    /* cor da fonte */
+    color: #0b467c;
+    
+    /* imagem de fundo */
+    background-image: url(../imagens/barra-lateral.png);
+    background-repeat: repeat-y;
+    background-size: 322px;
+}
+
+.erro{
+    color: red;
+    background-color: yellow;
+    padding: 10px;
+    border: 1px solid red;
+    width: 90%;
+    border-radius: 10px;
+}
+
+table{
+    /* estilo da borda */
+    border: 1px solid navy;
+    border-collapse: collapse;
+
+    /* margem */
+    margin: 5px;
+
+    /* largura */
+    min-width: 50%;
+    max-width: 100%;
+}
+
+th{
+    /* cor de fundo */
+    background-color: #D4E3FE;
+}
+
+th, td{
+    /* estilo da borda */
+    border: 1px solid navy;
+
+    /* espaçamento interno */
+    padding: 1px 5px;
+
+    /* tamanho da fonte */
+    /* font-size: 0.95em; */
+}
+
+td.direita{
+    text-align: right;
+}
+
+td.id {
+    width: 30px;
+    text-align: center;
+}
+
+header {
+    /* cor de fundo */
+    background-color: #004AAD;
+
+    /* define o espaçamemnto interno */
+    padding: 20px 20px;
+    
+    /* cor do texto */
+    color: white;
+
+    /* remove a margem */
+    margin: 0px;
+
+    /* altura */
+    /* height: 60px; */
+
+    /* tipo de exibicao "flex" para alinhar os elementos verticalmente*/
+    display: flex;
+    /* imagem de fundo */
+    /* background-image: url(../imagens/bach-header.png); */
+    background-image: url(../imagens/mec.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left center;
+    
+
+}
+
+header h2 {
+    /* definições da fonte */
+    font-size: 27pt;
+    font-weight: bold;
+    /* font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; */
+    /* font-family: cursive; */
+    text-indent: 225px;
+    color: #f4f7e1;
+    /* definições da margem */
+    /* margin: 0px 20px; */
+
+    /* aumenta o espaçamento entre as letras */
+    letter-spacing: 3px;
+}
+
+main {
+    /* define o espaçamemnto interno */
+    padding: 10px 20px;
+
+    /* remove a margem */
+    margin: 0px;
+
+    /* largura */
+    width: 70%;
+
+    /* remove a borda */
+    border: none;
+
+    /* definições do tipo de exibição dos elementos dentro de "main" */
+    display: inline-block;
+
+    /* define a altura da linha para que o texto fique centralizado verticalmente */
+    line-height: 1.7em;
+}
+
+main h2 {
+    /* remove a margem */
+    margin: 0px;
+
+    /* aplica um estilo na fonte para deixar as letras minúsculas com aparência de maiúsculas */
+    font-variant: small-caps;
+
+    /* cor da fonte */
+    color: #1775cd;
+
+    /* tamanho da fonte */
+    font-size: 1.5em;
+
+    /* borda inferior */
+    border-bottom: 1px solid #1775cd;
+
+    /* margem inferior */
+    margin-bottom: 10px;
+
+    /* espaçamento interno */
+    padding: 0px 0px 10px 0px;
+
+}
+
+nav {
+    /* remove a borda */
+    border: none;
+
+    /* definição do tipo de exibição dos elementos dentro de "nav" */
+    display: inline-block;
+
+    /* alinhamento vertical */
+    vertical-align: top;
+}
+
+nav ul {
+    /* remove os marcadores (bullets) */
+    list-style-type: none;
+
+    /* remove o espaçamento interno */
+    padding: 0px; 
+}
+
+nav ul a {
+    /* largura */
+    width: 300px;
+
+    /* altura */
+    height: 40px;
+
+    /* altera o diplay do <a> para "block" (o padrão é "inline") */
+    /* para que as propriedades width e height façam o efeito desejado */
+    display: block;
+
+    /* cor da fonte */
+    color: black;
+
+    /* remove o sublinhado do link */
+    text-decoration: none;
+
+    /* define a indentação do texto (recuo) */
+    text-indent: 12px;
+
+    /* define a altura da linha para que o texto fique centralizado verticalmente */
+    line-height: 40px;
+
+    /* remove a borda inserida para fins didáticos */
+    border: none;
+
+    /* cor de fundo */
+    background-color: #D4E3FE;
+
+    /* ajusta o espaçamento interno dos itens */
+    padding: 0px 0px 0px 20px;
+    
+    /* fonte negrito */
+    font-weight: bold;
+}
+
+/*** 
+Estilo utilizado quando o mouse passar por cima dos itens do menu de navegacao
+***/
+nav ul a:hover {
+    /* altera cor de fundo*/
+    background-color: #608CBB;
+
+    /* cor da fonte */
+    color: white;
+}

@@ -1,0 +1,39 @@
+{% extends "base.html" %} 
+{% load humanize %}
+
+{% block titulo_pagina %}
+    <h2>Dados Gerais</h2>
+{% endblock %} 
+
+{% block conteudo %}
+
+    <div class="dashboard">
+
+        <div class="card">
+            <h3>Instituições de Ensino</h3>
+            <p>{{ count_ies|intcomma }}</p>
+        </div>
+        
+        <div class="card">
+            <h3>Campi</h3>
+            <p>{{ count_campus|intcomma }}</p>
+        </div>
+        
+        <div class="card">
+            <h3>Áreas de Conhecimento</h3>
+            <p>{{ count_areas|intcomma }}</p>
+        </div>
+        
+        <div class="card">
+            <h3>Cursos</h3>
+            <p>{{ count_cursos|intcomma }}</p>
+        </div>
+        
+        <div class="card">
+            <h3>Ofertas de Cursos</h3>
+            <p>{{ count_ofertas|intcomma }}</p>
+        </div>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% load static %}
+{% load humanize %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cursos Superiores</title>
+    <link rel="stylesheet" href="{% static 'css/site.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cards.css' %}">
+</head>
+<body>
+    <!-- CABECALHO DA PAGINA -->
+    <header>
+        <h2>.: Cursos Superiores</h2> 
+        <!-- <span style="color: yellow;font-style: italic;">v1.0</span>  -->
+    </header>
+    <!-- MENU LATERAL DE NAVEGACAO -->
+    <nav>
+        <ul>
+            <li>  <a href="{% url 'home' %}">Home</a>  </li>
+            <li>  <a href="{% url 'dados_gerais' %}">Dados Gerais</a> </li>
+            <li>  <a href="{% url 'campi_uf' %}">Campi por UF</a> </li>
+        </ul>
+    </nav>
+    <!-- CONTEUDO DAS PAGINAS -->
+    <main>
+        <!-- Este bloco será utilizado para exiir o título da página -->
+        <div id="titulo_pagina">
+            {% block titulo_pagina %}
+                Título da Página
+            {% endblock %}            
+        </div>
+        <!-- Exibe mensagem de ERRO, caso tenha ocorrido algum -->
+        {% if ERRO %}
+            <h3 class="erro">ERRO: {{ERRO}}</h3>
+        {% endif %}            
+        <!-- Este bloco será utilizado para inserir o conteúdo das páginas. -->
+        <div id="conteudo">
+            {% block conteudo %}
+                Conteúdo da Página
+            {% endblock %}
+        </div>
+    </main>
+</body>
+
+
+
+
