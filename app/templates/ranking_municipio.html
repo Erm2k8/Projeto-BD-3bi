@@ -1,0 +1,33 @@
+{% extends "base.html" %} 
+{% load humanize %}
+
+{% block titulo_pagina %}
+    <h2>Ranking por Município</h2>
+{% endblock %} 
+
+{% block conteudo %}
+
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th class="col-posicao">Posição</th>
+                <th>Município</th>
+                <th class="col-quantidade">Quantidade de Campi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for municipio, uf, quantidade in data %}
+            <tr>
+                <td class="col-posicao">#{{ forloop.counter }}</td>
+                <td>{{ municipio }} - {{ uf }}</td>
+                <td class="col-quantidade">{{ quantidade|intcomma }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">Nenhum dado para o ranking foi encontrado.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

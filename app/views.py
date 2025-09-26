@@ -84,3 +84,118 @@ def qtd_campi_uf(request):
 
     except Exception as err:
         return render(request, template, context={'ERRO': err})
+
+def cursos_por_area(request):
+    template = "cursos_area.html"
+
+    try:
+        conn = obter_conexao()
+
+        cursor = conn.cursor()
+
+        sql = """
+            SELECT Area.descricao AS area_conhecimento, COUNT(cursos.id) AS quantidade_cursos
+            FROM Cursos_Oferecidos_por_Campus AS cursos
+            JOIN Area ON cursos.id_area = Area.id_area
+            GROUP BY Area.descricao
+            ORDER BY Area.descricao;
+        """
+
+        data = cursor.execute(sql).fetchall()
+
+        return render(request, template, 
+                    context={
+                          'data': data,
+                    })
+    
+    except Exception as err:
+        return render(request, template, context={'ERRO': err})
+
+def ranking_municipio(request):
+    template = "ranking_municipio.html"
+
+    try:
+        conn = obter_conexao()
+
+        cursor = conn.cursor()
+
+        sql = '''
+            SELECT TOP 15
+                Municipio.nome AS municipio,
+                Municipio.uf,
+                COUNT(Campus.id_campus) AS qtd_campi
+            FROM Campus 
+            JOIN Municipio ON Campus.id_municipio = Municipio.id_municipio
+            GROUP BY
+                Municipio.nome, Municipio.uf
+            ORDER BY
+                qtd_campi DESC
+        '''
+
+        data = cursor.execute(sql).fetchall()
+
+        return render(request, template, 
+                    context={
+                          'data': data,
+                    })
+    
+    except Exception as err:
+        return render(request, template, context={'ERRO': err})
+
+
+def ranking_ofertas_uf(request):
+    template = "ranking_ofertas_uf.html"
+
+    try:
+        conn = obter_conexao()
+
+        cursor = conn.cursor()
+
+        sql = '''
+            WITH RankingCursosPorUF AS (
+                SELECT
+                    m.uf,
+                    c.nome AS nome_curso,
+                    COUNT(coc.id) AS total_ofertas,
+                    AVG(coc.enade) AS media_enade,
+                    MIN(coc.enade) AS min_enade,
+                    MAX(coc.enade) AS max_enade,
+                    ROW_NUMBER() OVER (PARTITION BY m.uf ORDER BY COUNT(coc.id) DESC) AS ranking
+                FROM
+                    Cursos_Oferecidos_por_Campus AS coc
+                JOIN
+                    Curso AS c ON coc.id_curso = c.id_curso
+                JOIN
+                    Campus AS ca ON coc.id_campus = ca.id_campus
+                JOIN
+                    Municipio AS m ON ca.id_municipio = m.id_municipio
+                WHERE
+                    coc.enade >= 2.5
+                GROUP BY
+                    m.uf, c.nome
+            )
+            -- Seleção final a partir da tabela temporária.
+            SELECT
+                rc.uf,
+                rc.ranking AS "Posicao",
+                rc.nome_curso AS "Curso",
+                rc.total_ofertas AS "Ofertas",
+                -- O CONCAT junta o texto. ROUND arredonda e CAST converte para inteiro.
+                CONCAT(CAST(ROUND(rc.media_enade, 2) AS NUMERIC(10, 2)), ' [', CAST(rc.min_enade AS INT), '-', CAST(rc.max_enade AS INT), ']') AS "ENADE"
+            FROM
+                RankingCursosPorUF AS rc
+            WHERE
+                rc.ranking <= 10
+            ORDER BY
+                rc.uf, rc.ranking;
+        '''
+
+        data = cursor.execute(sql).fetchall()
+
+        return render(request, template, 
+                    context={
+                          'ranking_data': data,
+                    })
+    
+    except Exception as err:
+        return render(request, template, context={'ERRO': err})

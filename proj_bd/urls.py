@@ -26,4 +26,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('dados_gerais/', views.dados_gerais, name='dados_gerais'),
     path('campi_uf/', views.qtd_campi_uf, name='campi_uf'),
+    path('cursos_por_area/', views.cursos_por_area, name='cursos_por_area'),
+    path('ranking_municipio/', views.ranking_municipio, name='ranking_municipio'),
+    path('ranking_ofertas_uf/', views.ranking_ofertas_uf, name='ranking_ofertas_uf'),
 ] 

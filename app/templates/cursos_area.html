@@ -1,0 +1,21 @@
+{% extends "base.html" %} 
+{% load humanize %}
+
+{% block titulo_pagina %}
+    <h2>Cursos por Área</h2>
+{% endblock %} 
+
+{% block conteudo %}
+    <div class="dashboard">
+        {% for area, qtd in data %}
+            <div class="card">
+                <h3>{{ area }}</h3>
+                <p>{{ qtd|intcomma }}</p>
+            </div>
+        {% empty %}
+            <div class="card">
+                <p>Nenhuma área de conhecimento foi encontrada.</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

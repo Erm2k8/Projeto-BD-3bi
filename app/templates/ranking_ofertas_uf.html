@@ -1,0 +1,46 @@
+{% extends "base.html" %} 
+{% load humanize %}
+
+{% block titulo_pagina %}
+    <h2>Ranking Ofertas por UF</h2>
+{% endblock %} 
+
+{% block conteudo %}
+    {% for uf, posicao, curso, ofertas, enade in ranking_data %}
+        {% ifchanged uf %}
+            {% if not forloop.first %}
+                </tbody>
+                </table>
+            {% endif %}
+            
+            <table class="data-table">
+                <thead>
+                    <th id="titulo_tabela" colspan="4">{{ uf }}</th>
+                    <tr>
+                        <th class="col-posicao">Posição</th>
+                        <th>Curso</th>
+                        <th class="col-ofertas">Ofertas</th>
+                        <th class="col-enade">ENADE Med[Min-Max]</th>
+                    </tr>
+                </thead>
+                <tbody>
+        {% endifchanged %}
+        
+        <tr>
+            <td class="col-posicao">#{{ posicao }}</td>
+            <td>{{ curso }}</td>
+            <td class="col-ofertas">{{ ofertas|intcomma }}</td>
+            <td class="col-enade">{{ enade}}</td>
+        </tr>
+
+        {% if forloop.last %}
+            </tbody>
+            </table>
+        {% endif %}
+
+    {% empty %}
+        <div class="card">
+            <p>Nenhum dado para o ranking foi encontrado.</p>
+        </div>
+    {% endfor %}
+{% endblock %}
